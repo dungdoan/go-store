@@ -48,8 +48,7 @@ class UpdateProductCommand extends Command
         $productRepository = $this->entityManager->getRepository(Product::class);
 
         foreach($requestData as $data) {
-            $product = $productRepository->findBy(['eId' => $data->eId]);
-
+            $product = $productRepository->findOneBy(['eId' => $data->eId]);
             if (!$product) {
                 $product = new Product();
             }
@@ -69,15 +68,10 @@ class UpdateProductCommand extends Command
      */
     private function handleProduct($data, Product $product)
     {
-        $categoryRepository = $this->entityManager->getRepository(Category::class);
-
         $product->setEId($data->eId);
         $product->setTitle($data->title);
         $product->setPrice($data->price);
-        foreach($data->categoryEId as $categoryId) {
-            $category = $categoryRepository->findBy(['eId' => $categoryId]);
-            $product->addCategory($category);
-        }
+        $product->setCategories(json_encode($data->categoryEId));
         $this->entityManager->persist($product);
     }
 }

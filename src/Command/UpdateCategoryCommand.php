@@ -51,6 +51,8 @@ class UpdateCategoryCommand extends Command
 
             if (!$category) {
                 $category = new Category();
+            } elseif (is_array($category)) {
+                $category = current($category);
             }
             $this->handleCategory($data, $category);
             $this->entityManager->flush();

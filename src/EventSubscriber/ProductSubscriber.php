@@ -8,16 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProductSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var \Swift_Mailer $mailer
-     */
-    private \Swift_Mailer $mailer;
-
-    public function __construct(\Swift_Mailer $mailer)
-    {
-        $this->mailer = $mailer;
-    }
-
     public static function getSubscribedEvents()
     {
         return [
@@ -49,12 +39,13 @@ class ProductSubscriber implements EventSubscriberInterface
      */
     public function sendEmail()
     {
+        $mailer = new \Swift_Mailer();
         $message = new \Swift_Message('Notification about process product');
         $message->setFrom($_ENV['ADMIN_EMAIL'])
             ->setTo($_ENV['ADMIN_EMAIL'])
             ->setBody('The email is sent')
         ;
 
-        return $this->mailer->send($message);
+        return $mailer->send($message);
     }
 }

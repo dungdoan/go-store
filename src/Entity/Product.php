@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -15,8 +16,8 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class)]
-    private Collection $categories;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $categories = null;
 
     #[ORM\Column(length: 12)]
     private ?string $title = null;
@@ -37,26 +38,14 @@ class Product
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategories(): Collection
+    public function getCategories(): ?string
     {
         return $this->categories;
     }
 
-    public function addCategory(Category $category): self
+    public function setCategories(?string $categories): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        $this->categories->removeElement($category);
+        $this->categories = $categories;
 
         return $this;
     }
