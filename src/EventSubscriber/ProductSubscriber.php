@@ -11,8 +11,6 @@ class ProductSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ProductListener::PRODUCT_ADDED_EVENT => 'sendEmail',
-            ProductListener::PRODUCT_UPDATED_EVENT => 'sendEmail',
             Events::postPersist,
             Events::postUpdate,
         ];

@@ -76,7 +76,7 @@ class Product
 
     public function getEId(): ?int
     {
-        return $this->eld;
+        return $this->eId;
     }
 
     public function setEId(?int $eId): self

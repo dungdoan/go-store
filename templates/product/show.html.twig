@@ -20,15 +20,15 @@
                 <td>{{ product.price }}</td>
             </tr>
             <tr>
-                <th>Eld</th>
-                <td>{{ product.eld }}</td>
+                <th>EId</th>
+                <td>{{ product.eId }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_product_controller__index') }}">back to list</a>
+    <a href="{{ path('app_product__get') }}">back to list</a>
 
-    <a href="{{ path('app_product_controller__edit', {'id': product.id}) }}">edit</a>
+    <a href="{{ path('app_product__update', {'id': product.id}) }}">edit</a>
 
-    {{ include('product_controller//_delete_form.html.twig') }}
+    {{ include('product//_delete_form.html.twig') }}
 {% endblock %}

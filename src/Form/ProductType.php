@@ -15,9 +15,8 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('price', NumberType::class,
-                ['min' => 0, 'max' => 200])
-            ->add('eld')
+            ->add('price', NumberType::class)
+            ->add('eId')
             ->add('categories')
         ;
     }

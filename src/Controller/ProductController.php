@@ -22,8 +22,7 @@ class ProductController extends AbstractController
         $dispatcher->dispatch($event, ProductListener::PRODUCT_ADDED_EVENT);
 
         return $this->render('product//index.html.twig', [
-//            'products' => $productRepository->findAll(),
-            'products' => [],
+            'products' => $productRepository->findAll(),
         ]);
     }
 
@@ -40,7 +39,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('app_product__get', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product_controller//new.html.twig', [
+        return $this->renderForm('product//new.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
@@ -49,7 +48,7 @@ class ProductController extends AbstractController
     #[Route('/{id}', name: 'app_product__get_by_id', methods: ['GET'])]
     public function show(Product $product): Response
     {
-        return $this->render('product_controller//show.html.twig', [
+        return $this->render('product//show.html.twig', [
             'product' => $product,
         ]);
     }
@@ -66,7 +65,7 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('app_product__get', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product_controller//edit.html.twig', [
+        return $this->renderForm('product//edit.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
